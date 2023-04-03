@@ -1,6 +1,6 @@
 {
   "name": "ctrlc-node-pid",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "This a Node.js library which provides a method to cancel an application by PID on application level",
   "scripts": {
     "install": "node-gyp rebuild"
