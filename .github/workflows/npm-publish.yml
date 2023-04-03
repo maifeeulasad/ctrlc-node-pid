@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -19,8 +19,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: ${{ matrix.registry-url }}
-      - name: 'Installing deps'
-        run: npm i
+      - name: 'Installing node-gyp'
+        run: npm i -g node-gyp
       - name: 'Build'
         run: node-gyp rebuild
       - name: 'Copy build output to package directory'
