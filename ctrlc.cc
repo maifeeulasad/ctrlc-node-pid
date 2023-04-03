@@ -15,33 +15,29 @@ namespace ctrlc {
 
     // Check the number of arguments passed
     if (args.Length() < 1) {
-      isolate->ThrowException(
-          Exception::TypeError(String::NewFromUtf8(isolate, "Wrong number of arguments")));
+      // isolate->ThrowException(v8::Exception::TypeError(String::NewFromUtf8(isolate, "Wrong number of arguments")));
       return;
     }
 
     // Check the argument types
     if (!args[0]->IsNumber()) {
-      isolate->ThrowException(
-          Exception::TypeError(String::NewFromUtf8(isolate, "Argument must be a number")));
+      // isolate->ThrowException(v8::Exception::TypeError(String::NewFromUtf8(isolate, "Argument must be a number")));
       return;
     }
 
-    DWORD processId = args[0]->Uint32Value();
+    DWORD processId = args[0]->Uint32Value(isolate->GetCurrentContext()).FromJust();
 
     // Get handle to the process
     HANDLE hProcess = OpenProcess(SYNCHRONIZE | PROCESS_TERMINATE, FALSE, processId);
     if (hProcess == NULL) {
-      isolate->ThrowException(
-          Exception::Error(String::NewFromUtf8(isolate, "Failed to open process")));
+      // isolate->ThrowException(v8::Exception::Error(String::NewFromUtf8(isolate, "Failed to open process")));
       return;
     }
 
     // Attach to the console of the process
     if (!AttachConsole(processId)) {
       CloseHandle(hProcess);
-      isolate->ThrowException(
-          Exception::Error(String::NewFromUtf8(isolate, "Failed to attach to console")));
+      // isolate->ThrowException(v8::Exception::Error(String::NewFromUtf8(isolate, "Failed to attach to console")));
       return;
     }
 
@@ -64,7 +60,7 @@ namespace ctrlc {
     CloseHandle(hProcess);
 
     // Return the result
-    Local<Value> result = success && (waitResult == WAIT_OBJECT_0) ? True(isolate) : False(isolate);
+    Local<Value> result = success && (waitResult == WAIT_OBJECT_0) ? v8::True(isolate) : v8::False(isolate);
     args.GetReturnValue().Set(result);
   }
 
