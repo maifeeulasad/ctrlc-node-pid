@@ -1,0 +1,19 @@
+{
+  "name": "ctrlc-node-pid",
+  "version": "0.0.1",
+  "description": "This a Node.js library which provides a method to cancel an application by PID on application level",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maifeeulasad/ctrlc-node-pid.git"
+  },
+  "author": "Maifee Ul Asad <maifeeulasad@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maifeeulasad/ctrlc-node-pid/issues"
+  },
+  "homepage": "https://github.com/maifeeulasad/ctrlc-node-pid#readme"
+}
