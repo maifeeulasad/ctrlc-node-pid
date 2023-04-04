@@ -1,0 +1,14 @@
+name: Install MSVC and Show Version
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Install MSVC
+        run: |
+          curl -Lo vs_buildtools.exe https://aka.ms/vs/16/release/vs_buildtools.exe
+          vs_buildtools.exe --quiet --wait --norestart --installPath "C:\BuildTools" --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended
+      - name: Show MSVC Version
+        run: cl.exe
